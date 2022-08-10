@@ -11,9 +11,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { EntityHttpResourceUrls } from '@ngrx/data/src/dataservices/http-url-generator';
+
+const entityHttpResourceUrls: EntityHttpResourceUrls = {
+  ['Role']: {
+    entityResourceUrl: 'https://62f1c37bb1098f150804e663.mockapi.io/roles/',
+    collectionResourceUrl: 'https://62f1c37bb1098f150804e663.mockapi.io/roles'
+  }
+};
 
 const defaultDataServiceConfig: DefaultDataServiceConfig = {
-  root: 'https://62f1c37bb1098f150804e663.mockapi.io',
+  entityHttpResourceUrls
 };
 
 @NgModule({
@@ -35,7 +43,9 @@ const defaultDataServiceConfig: DefaultDataServiceConfig = {
       logOnly: environment.production
     })
   ],
-  providers: [{ provide: DefaultDataServiceConfig, useValue: defaultDataServiceConfig }],
+  providers: [
+    { provide: DefaultDataServiceConfig, useValue: defaultDataServiceConfig },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
